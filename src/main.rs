@@ -32,7 +32,7 @@ async fn download(url: &'static str, client: &reqwest::Client, re: &Regex) {
         tasks.spawn(async move {
             let file = file.split("/").last().unwrap();
             let url = format!("{}{}", url, file);
-            let file = if file.contains("forms") {
+            let file = if file.contains("form") {
                 format!("./assets/forms/{}", file)
             } else {
                 format!("./assets/{}", file)
