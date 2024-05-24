@@ -38,7 +38,9 @@ async fn download(url: &'static str, client: &reqwest::Client, re: &Regex) {
                 format!("./assets/{}", file)
             };
             let mut file = tokio::fs::File::create(file).await.unwrap();
+            println!("Downloading: {}", url);
             let mut response = client.get(&url).send().await.unwrap();
+            println!("Downlaoding: {}", url);
             while let Some(chunk) = response.chunk().await.unwrap() {
                 file.write_all(&chunk).await.unwrap();
             }
