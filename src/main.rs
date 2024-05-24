@@ -30,7 +30,11 @@ async fn download(url: &'static str, client: &reqwest::Client, re: &Regex) {
         let client = client.clone();
         tasks.spawn(async move {
             let file = file.split("/").last().unwrap();
-            let file = format!("./assets/{}", file);
+            let file = if file.contains("forms") {
+                format!("./assets/forms/{}", file)
+            } else {
+                format!("./assets/{}", file)
+            };
             let url = format!("{}{}", url, file);
             let mut file = tokio::fs::File::create(file).await.unwrap();
             let mut response = client.get(&url).send().await.unwrap();
@@ -40,5 +44,7 @@ async fn download(url: &'static str, client: &reqwest::Client, re: &Regex) {
         });
     }
 
-    while let Some(_) = tasks.join_next().await {}
+    while let Some(res) = tasks.join_next().await {
+        println!("Download result: {res:?}");
+    }
 }
