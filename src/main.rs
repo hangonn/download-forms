@@ -9,6 +9,7 @@ async fn main() {
     let url = "https://www.windhoekcc.org.na/documents/";
     let client = reqwest::Client::new();
     download(url, &client, &re).await;
+    println!("Downloaded all files");
 }
 
 async fn download(url: &'static str, client: &reqwest::Client, re: &Regex) {
