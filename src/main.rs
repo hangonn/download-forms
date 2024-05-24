@@ -41,24 +41,4 @@ async fn download(url: &'static str, client: &reqwest::Client, re: &Regex) {
     }
 
     while let Some(_) = tasks.join_next().await {}
-
-    // for cap in re.captures_iter(&body) {
-    //     if let Some(path) = cap.get(1) {
-    //         println!("{}", path.as_str());
-    //     }
-    // }
-
-    return;
-    // let document = Document::from(body.as_str());
-    // let links = document.find(Name("a")).filter_map(|n| n.attr("href"));
-    // for link in links {
-    //     let file = link.split("/").last().unwrap();
-    //     let file = format!("{}{}", output, file);
-    //     let url = format!("{}{}", url, link);
-    //     let mut file = File::create(file).unwrap();
-    //     let mut response = reqwest::get(url).await.unwrap();
-    //     while let Some(chunk) = response.chunk().await.unwrap() {
-    //         file.write_all(&chunk).unwrap();
-    //     }
-    // }
 }
